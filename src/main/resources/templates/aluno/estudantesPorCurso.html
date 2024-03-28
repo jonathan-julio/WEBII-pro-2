@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <title>Alunos</title>
+
+</head>
+
+<body>
+    <p>Lista de Estudantes por curso </p>
+    
+    <br><br>
+    <p>Tabela com as infos</p>
+    <!-- Itera sobre a lista de cursos -->
+<div th:each="curso : ${aluno}">
+    <h2 th:text="${curso[0].curso}">Nome do Curso</h2>
+    <!-- Cria uma tabela para os alunos associados a este curso -->
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Curso</th>
+          <th>Linguagem</th>
+          <th>Sistema Operacional</th>
+          <th>Total Estudantes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Itera sobre a lista de alunos para este curso -->
+        <tr th:each="aluno : ${curso}">
+          <td th:text="${aluno.primeiroNome}">Nome do Aluno</td>
+          <td th:text="${aluno.curso}">Nome do Aluno</td>
+          <td th:text="${aluno.linguagem}">Linguagem</td>
+          <td th:text="${aluno.sistemasOperacionais}">Sistema Operacional</td>
+          <td></td>
+        </tr>
+        <tr >
+            <td  > </td>
+            <td  > </td>
+            <td  > </td>
+            <td  > </td>
+            <td th:text="${#lists.size(curso)}">Total Estudantes</td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+  
+    <br><br>
+    <a href="/">Tela inicial</a><br>
+
+</body>
+
+</html>

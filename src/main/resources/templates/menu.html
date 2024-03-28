@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en"
+       xmlns="http://www.w3.org/1999/xhtml"  >
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spring MVC App</title>
+</head>
+<body>
+    <h2>Spring MVC Demo - Olá Mundo </h2>
+    <a href="aluno/showForm">Clique aqui para acessar o formulário de saudação</a><br>
+    <br>
+    <a href="aluno/getListaAlunos">Clique aqui para acessar a lista de Alunos!</a><br>
+    <br>
+    <a href="curso/showForm">Clique aqui para cadastrar curso.</a><br><br>
+    <div>
+        <label for="courseInput">Digite o curso para acessar a lista:</label>
+        <input type="text" id="courseInput" name="courseInput">
+        <button onclick="redirectToCourseList()">Ir</button>
+    </div>
+    <div>
+        <label for="lpfInput">Digite o Linguagem de programação favorita para acessar a lista:</label>
+        <input type="text" id="lpfInput" name="lpfInput">
+        <button onclick="redirectToLPFList()">Ir</button>
+    </div>
+    <div>
+        <label for="soInput">Selecione o(s) SO para acessar a lista:</label>
+        <div th:each="os : ${sistemasOperacionais}">
+            <input type="checkbox" name="sistemasOperacionais" th:value="${os}" th:text="${os}" />
+        </div>
+        <button onclick="redirectToSOList()">Ir</button>
+    </div>
+    
+    <script>
+        function redirectToCourseList() {
+            var course = document.getElementById('courseInput').value;
+            var url = 'aluno/getListaAlunosCurso/curso=' + encodeURIComponent(course);
+            window.location.href = url;
+        }
+        function redirectToLPFList() {
+            var LPF = document.getElementById('lpfInput').value;
+            var url = 'aluno/getListaAlunosLPF/lpf=' + encodeURIComponent(LPF);
+            window.location.href = url;
+        }
+        function redirectToSOList() {
+            var selectedSOs = [];
+            var checkboxes = document.querySelectorAll('input[name="sistemasOperacionais"]:checked');
+            
+            checkboxes.forEach(function(checkbox) {
+                selectedSOs.push(checkbox.value);
+            });
+
+            if (selectedSOs.length > 0) {
+                var url = 'aluno/getListaAlunosSO?sistemasOperacionais=' + encodeURIComponent(selectedSOs.join(','));
+                window.location.href = url;
+            } else {
+                alert("Selecione pelo menos um sistema operacional antes de prosseguir!");
+            }
+        }
+    </script>
+    </body>
+</html>
