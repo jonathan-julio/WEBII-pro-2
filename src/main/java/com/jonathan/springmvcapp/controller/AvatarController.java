@@ -24,25 +24,15 @@ public class AvatarController {
     @Autowired
     @Qualifier("alunoServiceImpl")
     AlunoService alunoService;
-
-
-
+    
     @Autowired
     AvatarService avatarService;
     
-    
-
-    public boolean init = false;
-
-
     @RequestMapping("/criarAvatar")
     public String getEstudantesPorSO(Model model) {
         List<AlunoOut> alunos = alunoService.getListaAluno();
-      
-
         model.addAttribute("alunos", alunos);
         model.addAttribute("avatar", new Avatar());
-
         return "avatar/formAvatar";
     }
 
@@ -59,7 +49,6 @@ public class AvatarController {
     @RequestMapping("/listaAvatar")
     public String listarAvatar( Model model) {
         List<AlunoOut> alunos = alunoService.getListaAluno();
-
         List<AlunoOut> alunoOuts = new ArrayList<>();
         for (AlunoOut alunoOut : alunos) {
             if (alunoOut.getAvatar().getNomeFantasia() != "") {

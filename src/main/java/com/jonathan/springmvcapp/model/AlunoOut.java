@@ -21,28 +21,25 @@ public class AlunoOut {
     private Avatar avatar;
     private Curso curso;
     private String linguagem;
-    private List<String> disciplina;
     private List<SistemaOperacional> sistemaOperacional;
     
-    public AlunoOut(Integer id, Pessoa pessoa, Avatar avatar, Curso curso, String linguagem, List<String> disciplina,
+    public AlunoOut(Integer id, Pessoa pessoa, Avatar avatar, Curso curso, String linguagem, 
             List<SistemaOperacional> sistemaOperacional) {
         this.id = id;
         this.pessoa = pessoa;
         this.avatar = avatar;
         this.curso = curso;
         this.linguagem = linguagem;
-        this.disciplina = disciplina;
         this.sistemaOperacional = sistemaOperacional;
     }
     public AlunoOut() {
     }
-    public AlunoOut(Integer id, Pessoa pessoa, Curso curso, String linguagem, List<String> disciplina,
+    public AlunoOut(Integer id, Pessoa pessoa, Curso curso, String linguagem, 
             List<SistemaOperacional> sistemaOperacional) {
         this.id = id;
         this.pessoa = pessoa;
         this.curso = curso;
         this.linguagem = linguagem;
-        this.disciplina = disciplina;
         this.sistemaOperacional = sistemaOperacional;
     }
     public Integer getId() {
@@ -75,12 +72,7 @@ public class AlunoOut {
     public void setLinguagem(String linguagem) {
         this.linguagem = linguagem;
     }
-    public List<String> getDisciplina() {
-        return disciplina;
-    }
-    public void setDisciplina(List<String> disciplina) {
-        this.disciplina = disciplina;
-    }
+    
     public List<SistemaOperacional> getSistemaOperacional() {
         return sistemaOperacional;
     }
@@ -92,6 +84,6 @@ public class AlunoOut {
     @Override
     public String toString() {
         return "AlunoOut [id=" + id + ", pessoa=" + pessoa + ", avatar=" + avatar + ", curso=" + curso + ", linguagem="
-                + linguagem + ", disciplina=" + disciplina + ", sistemaOperacional=" + sistemaOperacional + "]";
+                + linguagem + ", sistemaOperacional=" + sistemaOperacional + "]";
     }
 }

@@ -26,6 +26,7 @@
             <th th:text="Nome"></th>
             <th th:text="Curso"></th>
             <th th:text="Linguagem"></th>
+            <th th:text="Disciplinas"></th>
             <th th:text="SO"></th>
             <th th:text="Avatar"></th>
             <th th:text="Deletar"></th>
@@ -36,6 +37,12 @@
             <td th:text="${aluno.pessoa.primeiroNome}"></td>
             <td th:text="${aluno.curso.nome}"></td>
             <td th:text="${aluno.linguagem}"></td>
+            <td>
+              <span th:each="di, stat : ${aluno.curso.disciplinas}">
+                  <span th:text="${di}"></span>
+                  <span th:unless="${stat.last}">,</span>
+              </span>
+            </td>
             <td>
               <span th:each="so, stat : ${aluno.sistemaOperacional}">
                   <span th:text="${so.name}"></span>
@@ -50,7 +57,6 @@
     <br><br>
     <a href="/aluno/estudantesPorCurso">Estudantes por Curso</a><br>
     <a href="/aluno/estudantesPorLPF">Estudantes por Linguagem</a><br>
-    <a href="/aluno/estudantesPorSO">Estudantes por Sistema Operacional</a><br>
     <a href="/aluno/showForm">Formulário de alunos</a><br>
     <a href="/">Tela inicial</a><br>
 

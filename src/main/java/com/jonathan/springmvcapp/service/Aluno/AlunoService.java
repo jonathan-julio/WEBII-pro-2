@@ -23,10 +23,6 @@ public interface AlunoService {
 
     public List<AlunoOut> getListaAluno();
 
-    public List<Aluno> getAlunosPorCurso(String curso);
-
-    public List<Aluno> getAlunosPorLinguagem(String linguagem);
-
     public List<Aluno> getAlunosComSistemasOperacionaisComuns();
 
     public List<Aluno> getAlunosComSistemaOperacional(List<String> sistemasOperacionais);
@@ -38,6 +34,4 @@ public interface AlunoService {
     public List<Integer> getListSoIds(List<SistemaOperacional> list);
 
     public AlunoOut converAlunoOut(Aluno aluno);
-/* 
-    public List<SistemaOperacional> getEstudantesPorSO(String[] SO); */
 }

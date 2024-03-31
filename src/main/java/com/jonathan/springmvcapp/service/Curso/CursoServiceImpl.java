@@ -90,6 +90,19 @@ public class CursoServiceImpl implements CursoService {
         cursoRepository.updateCurso(id,nome,desc,disciplinas);
         return true;
     }
+    @SuppressWarnings("null")
+    @Override
+    public boolean deleteCurso(Integer id){
+        try {
+            cursoRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            System.err.println(e);
+            return false;
+        }
+       
+
+    }
 
 
 

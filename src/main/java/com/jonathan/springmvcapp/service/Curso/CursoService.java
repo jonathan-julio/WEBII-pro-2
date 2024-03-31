@@ -13,5 +13,7 @@ public interface CursoService {
     public List<Curso> getCurso();
     public Curso getCursoById(Integer id);
     public boolean updateCurso(Curso curso);
+    public boolean deleteCurso(Integer id);
+
     
 }

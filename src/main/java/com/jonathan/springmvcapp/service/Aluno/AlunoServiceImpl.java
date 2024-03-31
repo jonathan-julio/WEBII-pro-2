@@ -14,6 +14,7 @@ import com.jonathan.springmvcapp.model.Aluno;
 import com.jonathan.springmvcapp.model.AlunoOut;
 import com.jonathan.springmvcapp.model.Avatar;
 import com.jonathan.springmvcapp.model.Curso;
+import com.jonathan.springmvcapp.model.Disciplina;
 import com.jonathan.springmvcapp.model.SistemaOperacional;
 import com.jonathan.springmvcapp.repository.AlunoRepository;
 import com.jonathan.springmvcapp.repository.AvatarRepostory;
@@ -100,36 +101,22 @@ public class AlunoServiceImpl implements AlunoService {
         return null;
     }
 
-    @Override
-    public List<Aluno> getAlunosPorCurso(String curso) {
-        List<Aluno> alunos = alunoRepository.findAll();
-        List<Aluno> alunosPorCurso = new ArrayList<>();
-        for (Aluno aluno : alunos) {
-            if (aluno.getCurso().equals(curso)) {
-                alunosPorCurso.add(aluno);
-            }
-        }
-        return alunosPorCurso;
-    }
 
     @SuppressWarnings({ "deprecation", "null" })
     @Override
     public AlunoOut converAlunoOut(Aluno aluno){
         AlunoOut alunoOut = new AlunoOut();
-        List<String> disciplinas = new ArrayList<>();
 
         Avatar avatarAut = new Avatar(0, 0, "");
         Avatar avatar = avatarRepostory.findByIdAluno(aluno.getId());
         if (avatar != null) {
             avatarAut = avatar;
         }
-
-        
+        Curso curso = cursoService.getCursoById(aluno.getCurso());
         alunoOut.setId(aluno.getId());
         alunoOut.setPessoa(pessoaRepository.getById(aluno.getPessoa()));
-        alunoOut.setCurso(cursoService.getCursoById(aluno.getCurso()));
+        alunoOut.setCurso(curso);
         alunoOut.setLinguagem(aluno.getLinguagem());
-        alunoOut.setDisciplina(disciplinas);
         alunoOut.setSistemaOperacional(getListSoNames(aluno.getSistemaOperacional()));
         alunoOut.setAvatar(avatarAut);
         
@@ -156,17 +143,7 @@ public class AlunoServiceImpl implements AlunoService {
         return listaporcurso;
     }
 
-    @Override
-    public List<Aluno> getAlunosPorLinguagem(String linguagem) {
-        List<Aluno> alunos = alunoRepository.findAll();
-        List<Aluno> alunosPorLinguagem = new ArrayList<>();
-        for (Aluno aluno : alunos) {
-            if (aluno.getLinguagem().equals(linguagem)) {
-                alunosPorLinguagem.add(aluno);
-            }
-        }
-        return alunosPorLinguagem;
-    }
+    
 
     @Override
     public List<Aluno> getAlunosComSistemasOperacionaisComuns() {

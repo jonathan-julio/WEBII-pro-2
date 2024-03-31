@@ -18,7 +18,7 @@
     <ul>
         <li th:each="aluno : ${alunos}">
             <span
-                th:text="${aluno.primeiroNome} +' '+ ${aluno.ultimoNome} + ' - Curso:  ' + ${aluno.curso} ">
+                th:text="${aluno.pessoa.primeiroNome} +' '+ ${aluno.pessoa.ultimoNome} + ' - Curso:  ' + ${aluno.curso.nome} ">
         </li>
     </ul>
     <br><br>
@@ -34,10 +34,15 @@
         </thead>
         <tbody>
           <tr th:each="aluno: ${alunos}">
-            <td th:text="${aluno.primeiroNome}"></td>
-            <td th:text="${aluno.curso}"></td>
+            <td th:text="${aluno.pessoa.primeiroNome}"></td>
+            <td th:text="${aluno.curso.nome}"></td>
             <td th:text="${aluno.linguagem}"></td>
-            <td th:text="${aluno.sistemasOperacionais}"></td>
+            <td>
+              <span th:each="so, stat : ${aluno.sistemaOperacional}">
+                  <span th:text="${so.name}"></span>
+                  <span th:unless="${stat.last}">,</span>
+              </span>
+            </td>
           </tr>
         </tbody>
       </table>

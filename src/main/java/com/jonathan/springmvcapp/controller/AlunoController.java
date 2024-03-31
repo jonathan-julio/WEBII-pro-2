@@ -1,8 +1,10 @@
 package com.jonathan.springmvcapp.controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,7 +113,6 @@ public class AlunoController {
     public String showFormAluno(@ModelAttribute("aluno") AlunoOut aluno, Model model) {
         alunoService.salvarAlunoOut(aluno);
         model.addAttribute("aluno", aluno);
-
         return "aluno/cadastrorealizado";
     }
 
@@ -124,51 +125,61 @@ public class AlunoController {
 
     @RequestMapping("/getListaAlunosCurso/curso={curso}")
     public String showListaAlunoCurso(@PathVariable("curso") String curso, Model model) {
-        List<Aluno> alunos = alunoService.getAlunosPorCurso(curso);
-        model.addAttribute("alunos", alunos);
+        List<AlunoOut> alunos = alunoService.getListaAluno();
+        List<AlunoOut> alunosPorCurso = new ArrayList<>();
+        for (AlunoOut aluno : alunos) {
+            if (aluno.getCurso().getNome().equals(curso)) {
+                alunosPorCurso.add(aluno);
+            }
+        }
+        model.addAttribute("alunos", alunosPorCurso);
         return "aluno/listaAlunosCurso";
     }
 
     @RequestMapping("/getListaAlunosLPF/lpf={lpf}")
-    public String showListaAlunoLPF(@PathVariable("lpf") String lpf, Model model) {
-        System.err.println("CURSOOO: " + lpf);
-        List<Aluno> alunos = alunoService.getAlunosPorLinguagem(lpf);
-        model.addAttribute("alunos", alunos);
+    public String showListaAlunoLPF(@PathVariable("lpf") String linguagem, Model model) {
+        List<AlunoOut> alunos = alunoService.getListaAluno();
+        List<AlunoOut> alunosPorLinguagem = new ArrayList<>();
+        for (AlunoOut aluno : alunos) {
+            if (aluno.getLinguagem().equals(linguagem)) {
+                alunosPorLinguagem.add(aluno);
+            }
+        }
+        model.addAttribute("alunos", alunosPorLinguagem);
         return "aluno/listaAlunosLPF";
     }
 
     @RequestMapping("/getListaAlunosSO")
     public String showListaAlunoSO(@RequestParam("sistemasOperacionais") List<String> sistemasOperacionais,
             Model model) {
-        System.err.println("CURSOOO: " + sistemasOperacionais);
-        List<Aluno> alunos = alunoService.getAlunosComSistemaOperacional(sistemasOperacionais);
-        model.addAttribute("alunos", alunos);
+        List<AlunoOut> alunoOuts = alunoService.getListaAluno();
+        Set<AlunoOut> alunosComSistemasOperacionaisComunsSet = new HashSet<>();
+        List<AlunoOut> alunosComSistemasOperacionaisComuns = new ArrayList<>();
+
+        for (AlunoOut aluno : alunoOuts) {
+            List<SistemaOperacional> sistemasOperacionaisAluno = aluno.getSistemaOperacional(); 
+            for (AlunoOut outroAluno : alunoOuts) {
+                if (!aluno.equals(outroAluno)) {
+                    List<SistemaOperacional> sistemasOperacionaisOutroAluno = outroAluno.getSistemaOperacional();
+                    for (SistemaOperacional sistemaOperacional : sistemasOperacionaisAluno) {
+                        if (sistemasOperacionaisOutroAluno.contains(sistemaOperacional)) {
+                            alunosComSistemasOperacionaisComunsSet.add(aluno);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        alunosComSistemasOperacionaisComuns.addAll(alunosComSistemasOperacionaisComunsSet);
+        model.addAttribute("alunos", alunosComSistemasOperacionaisComuns);
         return "aluno/listaAlunosSO";
     }
 
-    // Request para retornar a lista de estudantes que têm ao menos um sistema
-    // operacional favorito em comum
-    @RequestMapping("/alunosComSistemasOperacionaisComuns")
-    public String alunosComSistemasOperacionaisComuns(Model model) {
-        List<Aluno> alunosComSistemasOperacionaisComuns = alunoService.getAlunosComSistemasOperacionaisComuns();
-        model.addAttribute("alunos", alunosComSistemasOperacionaisComuns);
-        return "aluno/listaAlunos";
-    }
-
-
-    @RequestMapping("/detelheAluno/id={id}")
-    public String getAlunoById(@PathVariable("id") Integer id, Model model) {
-        Aluno aluno = alunoService.getAlunoById(id);
-        
-        System.err.println("ALUNOD: " + aluno.toString());
-        model.addAttribute("aluno", aluno);
-        return "aluno/detalhe";
-    }
 
     @RequestMapping("/deteletarAluno/id={id}")
     public String deletarAluno(@PathVariable("id") Integer id, Model model) {
            AlunoOut aluno =   alunoService.deletarAluno(id);
-
             model.addAttribute("aluno", aluno);
             return "aluno/delete";
     }
@@ -187,12 +198,5 @@ public class AlunoController {
             return "aluno/estudantesPorLPF";
     }
 
-    /* @RequestMapping("/estudantesPorSO")
-    public String getEstudantesPorSO(Model model) {
-        List<SistemaOperacional>  ListaSO = alunoService.getEstudantesPorSO(mockDataService.getSistemasOperacionais());
-
-        model.addAttribute("ListaSO", ListaSO);
-        return "aluno/estudantesPorSO";
-    } */
 
 }

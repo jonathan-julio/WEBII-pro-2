@@ -70,22 +70,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <label for="soInput">Digite o Linguagem de programação favorita para acessar a lista:</label>
-                <div class="input-group mb-3"  th:each="os : ${sistemasOperacionais}">
-                    <div >
-                        <input type="checkbox" name="sistemasOperacionais" th:value=" ${os}" th:text="  ${os}" class="form-check-input">
-                    </div>
-                    
-                </div>
-                
-            </div>
-            
-        </div>
-        <button style="width: 50px; height: 50px; " onclick="redirectToSOList()" class="custom-btn">Ir</button>
-    
         
         <script>
             function redirectToCourseList() {
@@ -98,21 +82,7 @@
                 var url = 'aluno/getListaAlunosLPF/lpf=' + encodeURIComponent(LPF);
                 window.location.href = url;
             }
-            function redirectToSOList() {
-                var selectedSOs = [];
-                var checkboxes = document.querySelectorAll('input[name="sistemasOperacionais"]:checked');
-                
-                checkboxes.forEach(function(checkbox) {
-                    selectedSOs.push(checkbox.value);
-                });
-
-                if (selectedSOs.length > 0) {
-                    var url = 'aluno/getListaAlunosSO?sistemasOperacionais=' + encodeURIComponent(selectedSOs.join(','));
-                    window.location.href = url;
-                } else {
-                    alert("Selecione pelo menos um sistema operacional antes de prosseguir!");
-                }
-            }
+            
         </script>
     </div>
 </body>

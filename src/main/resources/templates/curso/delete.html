@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso Criado/editado</title>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        /* Exibição da mensagem com base no parâmetro */
+        var success = /*[[${success}]]*/ false;
+        function showAlertAndRedirect() {
+            if (success) {
+                alert("Curso deletado com sucesso!");
+                window.location.href = "/curso/listac-cursos";
+            } else {
+                alert("Houve um problema ao excluir o curso.");
+                window.location.href = "/";
+            }
+          
+        }
+        /*]]>*/
+    </script>
+</head>
+<body onload="showAlertAndRedirect()">
+</body>
+</html>
