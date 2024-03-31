@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spring MVC App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0-alpha1/css/bootstrap.min.css">
+    <style>
+        body{
+            width: 80%;
+            margin-left: 10%;
+            margin-right: 10%;
+        }
+        .main-container {
+            margin-top: 5%;
+            text-align: center;
+        }
+
+        .custom-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 7px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 20px;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .custom-btn:hover {
+            background-color: #3e8e41;
+        }
+        #so{
+            align-items: center;
+            justify-items: center;
+            justify-content: start;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid main-container">
+        <h2>Spring MVC Demo - Olá Mundo</h2>
+        <a href="aluno/showForm" class="custom-btn">formulário de Cadastro</a>
+        <a href="curso/showForm" class="custom-btn">Clique aqui para cadastrar curso</a>
+        <a href="curso/listac-cursos" class="custom-btn">Módulo Curso</a>
+        <a href="aluno/getListaAlunos" class="custom-btn">Módulo Aluno</a>
+        <a href="avatar/criarAvatar" class="custom-btn">Criar Avatar</a>
+        <a href="avatar/listaAvatar" class="custom-btn">Listar Avatar</a>
+        <a href="disciplina/criarDisciplina" class="custom-btn">Criar Disciplinas</a>
+        <a href="disciplina/listaDisciplina" class="custom-btn">Lista Disciplinas</a>
+        <br><br>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <label for="courseInput">Digite o curso para acessar a lista:</label>
+                <div class="input-group mb-3">
+                    <input type="text" id="courseInput" name="courseInput" class="form-control">
+                    <button onclick="redirectToCourseList()" class="btn btn-primary">Ir</button>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <label for="lpfInput">Digite o Linguagem de programação favorita para acessar a lista:</label>
+                <div class="input-group mb-3">
+                    <input type="text" id="lpfInput" name="lpfInput" class="form-control">
+                    <button onclick="redirectToLPFList()" class="btn btn-primary">Ir</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <label for="soInput">Digite o Linguagem de programação favorita para acessar a lista:</label>
+                <div class="input-group mb-3"  th:each="os : ${sistemasOperacionais}">
+                    <div >
+                        <input type="checkbox" name="sistemasOperacionais" th:value=" ${os}" th:text="  ${os}" class="form-check-input">
+                    </div>
+                    
+                </div>
+                
+            </div>
+            
+        </div>
+        <button style="width: 50px; height: 50px; " onclick="redirectToSOList()" class="custom-btn">Ir</button>
+    
+        
+        <script>
+            function redirectToCourseList() {
+                var course = document.getElementById('courseInput').value;
+                var url = 'aluno/getListaAlunosCurso/curso=' + encodeURIComponent(course);
+                window.location.href = url;
+            }
+            function redirectToLPFList() {
+                var LPF = document.getElementById('lpfInput').value;
+                var url = 'aluno/getListaAlunosLPF/lpf=' + encodeURIComponent(LPF);
+                window.location.href = url;
+            }
+            function redirectToSOList() {
+                var selectedSOs = [];
+                var checkboxes = document.querySelectorAll('input[name="sistemasOperacionais"]:checked');
+                
+                checkboxes.forEach(function(checkbox) {
+                    selectedSOs.push(checkbox.value);
+                });
+
+                if (selectedSOs.length > 0) {
+                    var url = 'aluno/getListaAlunosSO?sistemasOperacionais=' + encodeURIComponent(selectedSOs.join(','));
+                    window.location.href = url;
+                } else {
+                    alert("Selecione pelo menos um sistema operacional antes de prosseguir!");
+                }
+            }
+        </script>
+    </div>
+</body>
+</html>

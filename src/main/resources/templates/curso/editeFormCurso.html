@@ -8,7 +8,8 @@
     <title>Formulário Aluno</title>
 </head>
 <body>
-    <form action="#" th:action="@{/curso/addCurso}" th:object="${curso}" method="post">
+    <form action="#" th:action="@{/curso/editeCurso}" th:object="${curso}" method="post">
+        <p>ID do Curso: <input type="text" th:field="*{id}" placeholder="Insira o nome" readonly  style="background-color: #f0f0f0; color: #888888;"/></p>
         <p>Nome do Curso: <input type="text" th:field="*{nome}" placeholder="Insira o nome" required /></p>
         <p>Descrição: <input type="text" th:field="*{descricao}" placeholder="Insira a Descrição" required/></p>
         <p><input type="submit" value="Adicionar" /></p>

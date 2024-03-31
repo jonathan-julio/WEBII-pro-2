@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <title>Disciplinas</title>
+</head>
+
+<body>
+    
+
+    <!-- Verificar se a lista de alunos está vazia -->
+    <th:block th:if="${disciplinas.empty}">
+        <p>Nenhuma disciplina cadastrada.</p>
+    </th:block>
+
+
+    <!-- Verificar se a lista de alunos não está vazia -->
+    <th:block th:if="${not disciplinas.empty}">
+    <p>Lista de disciplina cadastradas </p>
+    <br><br>
+    <p>Tabela com as infos</p>
+        <table>
+            <thead>
+                <tr>
+                    <th th:text="Nome"></th>
+                    <th th:text="Codigo"></th>
+                    <th th:text="Ementa"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="disciplina: ${disciplinas}">
+                    <td th:text="${disciplina.nome}"></td>
+                    <td th:text="${disciplina.codigo}"></td>
+                    <td th:text="${disciplina.ementa}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </th:block>
+
+    <br><br>
+    <a href="/aluno/estudantesPorCurso">Estudantes por Curso</a><br>
+    <a href="/aluno/estudantesPorLPF">Estudantes por Linguagem</a><br>
+    <a href="/aluno/estudantesPorSO">Estudantes por Sistema Operacional</a><br>
+    <a href="/aluno/showForm">Formulário de alunos</a><br>
+    <a href="/">Tela inicial</a><br>
+
+</body>
+
+</html>

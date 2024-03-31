@@ -12,15 +12,15 @@
     
   
        <h1>Aluno deletado</h1>
-        <p th:text="'Primeiro nome: ' + ${aluno.primeiroNome}">
-        <p th:text="'Nome completo: ' + ${aluno.primeiroNome} + ' ' + ${aluno.ultimoNome} "></p>
-        <p th:text="'Email:  ' + ${aluno.email}"></p>
-        <p th:text="'Curso:  ' + ${aluno.curso}"></p>
+        <p th:text="'Primeiro nome: ' + ${aluno.pessoa.primeiroNome}">
+        <p th:text="'Nome completo: ' + ${aluno.pessoa.primeiroNome} + ' ' + ${aluno.pessoa.ultimoNome} "></p>
+        <p th:text="'Email:  ' + ${aluno.pessoa.email}"></p>
+        <p th:text="'Curso:  ' + ${aluno.curso.nome}"></p>
         <p th:text="'Linguagem favorita:  ' + ${aluno.linguagem}"></p>
         <p>Sistemas Operacionais favoritos: </p>
         
         <ul>
-            <li th:each="os : ${aluno.sistemasOperacionais}" th:text="${os}"></li>
+            <li th:each="os : ${aluno.sistemaOperacional}" th:text="${os.name}"></li>
         </ul>    
         
         <br><br>

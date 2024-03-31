@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <title>Alunos</title>
+</head>
+
+<body>
+    
+
+    <!-- Verificar se a lista de alunos está vazia -->
+    <th:block th:if="${alunos.empty}">
+        <p>Nenhum aluno cadastrado.</p>
+    </th:block>
+
+
+    <!-- Verificar se a lista de alunos não está vazia -->
+    <th:block th:if="${not alunos.empty}">
+    <p>Lista de Avatar cadastrados </p>
+    <br><br>
+    <p>Tabela com as infos</p>
+        <table>
+            <thead>
+                <tr>
+                    <th th:text="Nome"></th>
+                    <th th:text="Estudante"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="aluno: ${alunos}">
+                    <td th:text="${aluno.avatar.nomeFantasia}"></td>
+                    <td th:text="${aluno.pessoa.primeiroNome}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </th:block>
+
+    <br><br>
+    <a href="/aluno/estudantesPorCurso">Estudantes por Curso</a><br>
+    <a href="/aluno/estudantesPorLPF">Estudantes por Linguagem</a><br>
+    <a href="/aluno/estudantesPorSO">Estudantes por Sistema Operacional</a><br>
+    <a href="/aluno/showForm">Formulário de alunos</a><br>
+    <a href="/">Tela inicial</a><br>
+
+</body>
+
+</html>

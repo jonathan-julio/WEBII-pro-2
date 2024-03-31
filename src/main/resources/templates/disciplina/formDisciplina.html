@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <title>Formulário Aluno</title>
+
+    
+</head>
+<body>
+
+    <form action="#" th:action="@{/disciplina/addDisciplina}" th:object="${disciplina}" method="post">
+        <p>Nome: <input type="text" th:field="*{nome}" placeholder="Insira seu nome" required /></p>
+        <p>Codigo: <input type="text" th:field="*{codigo}" placeholder="Insira seu nome" required/></p>
+        <p>ementa: <input type="text" th:field="*{ementa}" placeholder="Insira seu nome" required/></p>
+        
+        <p>Curso: 
+            <div th:each="curso : ${cursos}">
+                <input  type="checkbox" th:value="${curso.id}" th:text="${curso.nome}" th:name="cursoIds" />
+            </div>
+        </p>
+        <p><input type="submit" value="Adicionar" /></p>
+    </form>
+    <br><br>
+    <a href="/">Tela inicial</a><br>
+    
+</body>
+</html>

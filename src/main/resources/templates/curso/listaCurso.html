@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -11,39 +11,33 @@
 </head>
 
 <body>
-    <p>Lista de alunos cadastrados </p>
-    <ul>
-        <li th:each="aluno : ${alunos}">
-            <span
-                th:text="${aluno.pessoa.primeiroNome} +' '+ ${aluno.pessoa.ultimoNome} + ' - Curso:  ' + ${aluno.curso.nome} ">
-        </li>
-    </ul>
+    <p>Lista de cursos cadastrados </p>
+    
     <br><br>
     <p>Tabela com as infos</p>
     <table>
         <thead>
           <tr>
             <th th:text="Nome"></th>
-            <th th:text="Curso"></th>
-            <th th:text="Linguagem"></th>
-            <th th:text="SO"></th>
-            <th th:text="Avatar"></th>
+            <th th:text="Descrição"></th>
+            <th th:text="Disciplinas"></th>
+            <th th:text="Editar"></th>
             <th th:text="Deletar"></th>
+
           </tr>
         </thead>
         <tbody>
-          <tr th:each="aluno: ${alunos}">
-            <td th:text="${aluno.pessoa.primeiroNome}"></td>
-            <td th:text="${aluno.curso.nome}"></td>
-            <td th:text="${aluno.linguagem}"></td>
+          <tr th:each="curso: ${cursos}">
+            <td th:text="${curso.nome}"></td>
+            <td th:text="${curso.descricao}"></td>
             <td>
-              <span th:each="so, stat : ${aluno.sistemaOperacional}">
-                  <span th:text="${so.name}"></span>
+              <span th:each="so, stat : ${curso.disciplinas}">
+                  <span th:text="${so}"></span>
                   <span th:unless="${stat.last}">,</span>
               </span>
             </td>
-            <td th:text="${aluno.avatar.nomeFantasia}"></td>
-            <td><a th:href="'deteletarAluno/id=' + ${aluno.id}">deletar</a></td>
+            <td><a th:href="'editarCurso/id=' + ${curso.id}">Editar</a></td>
+            <td><a th:href="'deteletarAluno/id=' + ${curso.id}">deletar</a></td>
           </tr>
         </tbody>
       </table>

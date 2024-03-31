@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <title>Formulário Aluno</title>
+
+    
+</head>
+<body>
+
+    <form action="#" th:action="@{/avatar/addAvatar}" th:object="${avatar}" method="post">
+        <p>Nome Fantasia: <input type="text" th:field="*{nomeFantasia}" placeholder="Insira seu nome" onchange="this.value = this.value.trim()" required /></p>
+
+        <p>Alunos: 
+            <select th:field="*{idAluno}">
+                <option th:each="aluno: ${alunos}" th:value="${aluno.id}" th:text="${aluno.pessoa.primeiroNome}" required>
+            </select>
+        </p>
+        
+        <p><input type="submit" value="Adicionar" /></p>
+    </form>
+    <br><br>
+    <a href="/">Tela inicial</a><br>
+    <script>
+        $('#buscar').click(function () {
+
+        var $palavra = $('#palavra');
+
+
+        $palavra.val().trim().length && buscar($palavra.val());
+
+        if ($palavra.val().trim().length) {
+            buscar($palavra.val());
+        }
+        });
+    </script>
+</body>
+</html>

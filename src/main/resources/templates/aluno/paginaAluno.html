@@ -11,14 +11,14 @@
 <body>
     
   
-       <h1><p th:text="' Olá, ' + ${aluno.primeiroNome}"></h1>
-        <p th:text="'Seja bem-vindo, ' + ${aluno.primeiroNome} + ' ' + ${aluno.ultimoNome} "></p>
-        <p th:text="'Seu curso é:  ' + ${aluno.curso}"></p>
+       <h1><p th:text="' Olá, ' + ${aluno.pessoa.primeiroNome}"></h1>
+        <p th:text="'Seja bem-vindo, ' + ${aluno.pessoa.primeiroNome} + ' ' + ${aluno.pessoa.ultimoNome} "></p>
+        <p th:text="'Seu curso é:  ' + ${aluno.curso.nome}"></p>
         <p th:text="'Linguagem favorita:  ' + ${aluno.linguagem}"></p>
         <p>Sistemas Operacionais favoritos: </p>
         
         <ul>
-            <li th:each="os : ${aluno.sistemasOperacionais}" th:text="${os}"></li>
+            <li th:each="os : ${aluno.sistemaOperacional}" th:text="${os.name}"></li>
         </ul>    
         
         <br><br>

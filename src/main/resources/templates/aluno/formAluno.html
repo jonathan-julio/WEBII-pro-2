@@ -12,11 +12,11 @@
 <body>
 
     <form action="#" th:action="@{/aluno/addAluno}" th:object="${aluno}" method="post">
-        <p>Primeiro Nome: <input type="text" th:field="*{primeiroNome}" placeholder="Insira seu nome" required /></p>
-        <p>Último Nome: <input type="text" th:field="*{ultimoNome}" placeholder="Insira seu nome" required/></p>
+        <p>Primeiro Nome: <input type="text" th:field="*{pessoa.primeiroNome}" placeholder="Insira seu nome" required /></p>
+        <p>Último Nome: <input type="text" th:field="*{pessoa.ultimoNome}" placeholder="Insira seu nome" required/></p>
         <p>Curso: 
             <select th:field="*{curso}">
-                <option th:each="curso: ${cursos}" th:value="${curso.nome}" th:text="${curso.nome}" required>
+                <option th:each="curso: ${cursos}" th:value="${curso.id}" th:text="${curso.nome}" required>
             </select>
         </p>
         <p required> Linguagem de programação:
@@ -26,8 +26,8 @@
             <input type="radio" th:field="*{linguagem}" th:value="Javascript" th:text="Javascript"/>
         </p>
         <p>
-            <div th:each="os : ${sistemasOperacionais}">
-                <input th:field="*{sistemasOperacionais}" type="checkbox" th:value="${os}" th:text="${os}" />
+            <div th:each="os : ${SistemaOperacional}">
+                <input th:field="*{SistemaOperacional}" type="checkbox" th:value="${os.id}" th:text="${os.name}" />
             </div>
             
         </p>
